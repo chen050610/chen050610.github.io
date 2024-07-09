@@ -1,0 +1,863 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Vue3补充 | chenw</title><meta name="author" content="chenw,3445883193@qq.com"><meta name="copyright" content="chenw"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Vue3补充"><meta name="application-name" content="Vue3补充"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Vue3补充"><meta property="og:url" content="http://example.com/2024/02/06/Vue3/index.html"><meta property="og:site_name" content="chenw"><meta property="og:description" content="摘要  正文 Vue3使用vite创建工程选择一个目录创建，使用管理员打开  ​	  暂时先不开语法检查 在使用 1npm install   打开文件目录  这里的入口文件是 index.html  不再是main.js src文件的main.js  在setup里面没有this 语法糖 之前se"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="chenw"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="摘要  正文 Vue3使用vite创建工程选择一个目录创建，使用管理员打开  ​	  暂时先不开语法检查 在使用 1npm install   打开文件目录  这里的入口文件是 index.html  不再是main.js src文件的main.js  在setup里面没有this 语法糖 之前se"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://example.com/2024/02/06/Vue3/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: chenw","link":"链接: ","source":"来源: chenw","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'chenw',
+  title: 'Vue3补充',
+  postAI: '',
+  pageFillDescription: 'Vue3, 使用vite创建工程, reactive的局限, 使用props传数据在vue3, 自定义HOOKs, 路由, props配置项, 编程式导航, 重定义, pinia, getters, 组件通信的梳理, v-model, useattrs摘要正文使用创建工程选择一个目录创建使用管理员打开暂时先不开语法检查在使用打开文件目录这里的入口文件是不再是文件的在里面没有语法糖之前里面要返回特别麻烦这次写成这样的代码点我发送信息但是这样开发者工具的就是组件文件的名字如果需要更改还需要再写一个标签也可以这么写不过需要使用插件然后在修改配置先引入在使用在的文件里面如果你不想总是的话可以使用插件的局限如果直接把对象的内容整个都换了就会导致失去响应式借助一个这样就可以实现整体的替换或者还有一种方法那就是定义成的对象语法糖里的和这样的页面是不会有响应式的哦因为你这样传过去的数据是纯纯字符串不是对象或者的这样就可以把适用于一个的属性的怎么让计算属性既有可读的属性又有更改的属性的简写只会有读的属性如果这么写的值是改不了的监视值的范围函数返回的一个结果函数调用的时候会有响应值的是一个函数调用它就会停止监视所以可以这样当的时候停止监视的监视监视定义的对象类型修改里面的值不会监视的到但是整个修改会引起地址的变化会监视的到如果想要监视对象内部的变化的话需要使用加上监视定义的数据这两种方法是不同的第一个的是地址的彻底改了第二个的是只是批量的把属性的值更改了定义的对象默认是开启深度监视的总结定义的对象需要使用开启但是定义的对象需要手动进行更改监视对象下的某个属性刚才说到检测的类型可以用一个箭头函数返回属性的属性值如果属性还是函对象的如果这么些的话里面的和更改会被监视但是整体改的话监视不到函数与此相反所以最好的写法监视对象中的对象把深度打开这样都能检测的到多个数据的写成数组在组件里面存在大量的代码这里面的代码都可以删去直流一个就可以因为可以自动的可以把出去就相当于注册组件在获取页面的标签有些问题在里面有一个的在里面也有一个这样在里面获取这个就会把组件的也获取出来所以使用这样就可以获取元素而且的只在自己的组件获取如果把放在组件的标签上获取到的是组件的实例对象它可以获取自组件的变量但是必须还得暴露出来在子组件在子组件把需要暴露的值写在这里先去学习学完以后再回来使用接口规范定义的定义的类创建的文件夹定义规范在组件导入的时候接收的时候需要使用如果定义成数组每一个对象符合接口的规范这里姐可以使用泛型或者干净一点的话在的里面或者就是数组定义的类型推荐直接传递泛型下面演示可以写成这样的使用传数据在组件组件而且还有返回值因为在这是打印不出的因为没有变量这样的补充一下居然还可以遍历数字这样遍历次但是数据是空白的也可以设置规范使用泛型代码这样就限制了传过来的是符合泛型的继续升级这回可以接收限制类型限制必要性指定默认值需要使用问号的作用的是可以不用传递后面的默认值必须是函数的返回值总结的还有重点刚才在引入和之前引入的那个没有从引入就可以使用我们称这些函数为宏函数声明周期这回变成箭头函数了父和子的生命周期从父亲的代码一个一个执行所以先挂载的是子组件遇到子的的组件就进入子组件执行完在到父组件然后挂载父组件自定义模块式开发每个功能的方法和数据写在一起首先创建的文件夹这里一般装模块的命名基本使用开头把代码包装成一个函数然后再返回出来然后在组件里面先调用那个函数就会返回刚才的然后再解构赋值而且里面还可以写钩子还可以使用计算属性监视属性路由路由的变化在里面引入创建应用在路由器的配置文件里面路由的工作模式名字发生改变而且必须有一个配置项叫做之前配置路由模式如果想要整哈希的话之前的命名路由和的对象方法还是之前的那样嵌套路由父级路由两种方法传递的参数内马尔达席尔瓦桑托斯儒尼奥尔年月日出生于巴西圣保罗州巴西职业足球运动员司职前锋现效力于沙特阿拉伯职业足球联赛的利雅得新月足球俱乐部亦担任巴西国家男子足球队队长罗克里斯蒂亚诺罗纳尔多全名克里斯蒂亚诺罗纳尔多多斯桑托斯阿维罗简称罗年月日出生于葡萄牙马德拉群岛丰沙尔葡萄牙职业足球运动员司职边锋中锋现效力于沙特阿拉伯职业足球联赛的利雅得胜利足球俱乐部姆巴佩基利安姆巴佩全名基利安桑米姆巴佩洛坦年月日出生于法国塞纳圣但尼省邦迪法国职业足球运动员司职前锋现效力于法国足球甲级联赛的巴黎圣日耳曼足球俱乐部菲利克斯若昂费利克斯全名若昂费利克斯塞凯拉年月日出生于葡萄牙维塞乌葡萄牙职业足球运动员司职前锋现效力于西班牙足球甲级联赛的巴塞罗那足球俱乐部新闻接收的话注意如果从响应式对象里面直接解构就会失去响应式的返回值参数第二种的的必须是不能写路径在使用第一种写法的时候发现传递的内容不能太长第二种的写法没有这个限制内马尔达席尔瓦桑托斯儒尼奥尔年月日出生于巴西圣保罗州巴西职业足球运动员司职前锋现效力于沙特阿拉伯职业足球联赛的利雅得新月足球俱乐部亦担任巴西国家男子足球队队长罗克里斯蒂亚诺罗纳尔多全名克里斯蒂亚诺罗纳尔多多斯桑托斯阿维罗简称罗年月日出生于葡萄牙马德拉群岛丰沙尔葡萄牙职业足球运动员司职边锋中锋现效力于沙特阿拉伯职业足球联赛的利雅得胜利足球俱乐部姆巴佩基利安姆巴佩全名基利安桑米姆巴佩洛坦年月日出生于法国塞纳圣但尼省邦迪法国职业足球运动员司职前锋现效力于法国足球甲级联赛的巴黎圣日耳曼足球俱乐部菲利克斯若昂费利克斯全名若昂费利克斯塞凯拉年月日出生于葡萄牙维塞乌葡萄牙职业足球运动员司职前锋现效力于西班牙足球甲级联赛的巴塞罗那足球俱乐部而且占位的和这里的要保持一致注意不能传递数组第二种的传递方法只能使用路由的占位的名字和的参数名保持一致还有一个可以控制传递和不传递在后面加上在的选项里面就可以不用传递这个参数也可以传递配置项第一种使用的写法在配置文件这样传递给的数据就是的参数然后在这里接收这个参数第二种函数的写法这里可以也可以获取到的参数然后再接受更简单的规则又是和没有记录编程式导航调用和获取传递的参数不一样记住一定是不是这样就可以再点击首页以后跳转到实际上编程式导航比用的多记住里面能写什么这个里面就可以写什么代码点击查看新闻内马尔达席尔瓦桑托斯儒尼奥尔年月日出生于巴西圣保罗州巴西职业足球运动员司职前锋现效力于沙特阿拉伯职业足球联赛的利雅得新月足球俱乐部亦担任巴西国家男子足球队队长罗克里斯蒂亚诺罗纳尔多全名克里斯蒂亚诺罗纳尔多多斯桑托斯阿维罗简称罗年月日出生于葡萄牙马德拉群岛丰沙尔葡萄牙职业足球运动员司职边锋中锋现效力于沙特阿拉伯职业足球联赛的利雅得胜利足球俱乐部姆巴佩基利安姆巴佩全名基利安桑米姆巴佩洛坦年月日出生于法国塞纳圣但尼省邦迪法国职业足球运动员司职前锋现效力于法国足球甲级联赛的巴黎圣日耳曼足球俱乐部菲利克斯若昂费利克斯全名若昂费利克斯塞凯拉年月日出生于葡萄牙维塞乌葡萄牙职业足球运动员司职前锋现效力于西班牙足球甲级联赛的巴塞罗那足球俱乐部新闻重定义刚开始进入首页的时候什么也没有在一级路由下定义一个重定向让刚进来的首页为没有那么臃肿都是集中式状态管理就是把数据放在一个容器里面安装发现是一个定义的对像而且里面还有刚才在定义的这里的是类型的那怎么读出来呢这样读是错误的因为模仿一下定义在的对象的属性再用定义读取的时候就不用加或者用修改的方法直接解构的话就会失去响应式这个东西也可以使用但是这么写里面全部都是对象了用不到的东西也正上了所以一般使用里的里面的和里面的一样感觉里面有的参数可以读到里面的数据或者这里的样式可以读到的如果不用的话这个就可以简写成箭头函数然后直接在组件里面就可以获取的到订阅有点像监视属性里面的数据发生了变化只要一修改的话第二个参数比较重要组合式的写法组合式写法组合式这是组合式的写法组件通信的梳理自定义事件子组件给父组件传递信息这样就可以把数据给数据给传过去实现任意组件的通信差不多都一样的首先准备的文件夹最后在暴露然后在里面引入然后就可以实现任意组建的通信的了接收数据的一般绑定事件发送数据的一般触发事件然后在卸载的使用要第四种方法实际上用不到到我们使用的库就是用这个通信的但是这个可以在外面像别人装的底层原理这么实现的前面的实现数据单页面但是页面到不了数据所以后面解决这个问题之前的的输入框可以加入但是这次的得写成这样的先过把不懂这里的实现给当前的组建的子组件后代组件通信之前额和传过去的但是没有接受那么剩下的就在里面我们就可以就可以接受的到升级的后面也能写成对象的形式怎么传给孙子的组件呢在子组件哪里要接收然后在父组件哪里使用这样就能把父亲的传给孙子这回都能收到然后传过去函数就能实现孙传给爷和先说就是之前说过的把放在子组件的标签上然后在子组件中暴露出数据就可以这样就可以在之前有个获取的时间对象这个获取的就是全部的子组件暴露的数据有一个容易出错的地方当遍历对象的时候不能使用这样去遍历因为这样是上去找的就是这个变量属性是子组件操作父组件的和的使用父组件也需要使用暴露出来和记住传数据的时候不要加入而且接收数据的还有默认值如果没有穿过这个数据的话默认值就为还有而且传数据的时候还可以传递成对象的形式然后添加默认值记住不要插槽具名插槽之前都学过不多赘述了只能使用在和组件标签上所以只能用包裹默认的插槽也是有名字的叫做记住的后面是作用域插槽这次的后面是如果名字和传值都在的话这么写其他的使用以后定义的对象里面的数据就不是响应式的就比如修改和就没有响应式但是整体还是有响应式的修改整个对象还是好用的里的只对象的第一层可以有响应式函数里面要求是响应式的数据这样的就是只读的会跟着变但是改不了只会处理浅层次的把响应式数据还原成响应数据这里的和函数的位置要记住实现父子组件数据同步之前父亲给儿子传递数据然后再子组件更改数据然后需要自定义事件把新的值在传回去在修改现在之间使用获取组件标签上的所有属性和方法然后在用获取所有传递过来的属性和方法直接把给缩写了其实就是这样的写成对象的形式最后也会打开类似于的',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-03-31 14:25:58',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">chenw</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Games/" style="font-size: 1.05rem;">Games<sup>3</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>1</sup></a><a href="/tags/PS3/" style="font-size: 1.05rem;">PS3<sup>2</sup></a><a href="/tags/axios/" style="font-size: 1.05rem;">axios<sup>1</sup></a><a href="/tags/chenw/" style="font-size: 1.05rem;">chenw<sup>1</sup></a><a href="/tags/js%E8%BF%9B%E9%98%B6/" style="font-size: 1.05rem;">js进阶<sup>1</sup></a><a href="/tags/promise%E4%BD%BF%E7%94%A8/" style="font-size: 1.05rem;">promise使用<sup>1</sup></a><a href="/tags/typescript/" style="font-size: 1.05rem;">typescript<sup>1</sup></a><a href="/tags/vue3%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 1.05rem;">vue3项目实践<sup>1</sup></a><a href="/tags/webpack/" style="font-size: 1.05rem;">webpack<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">Vue3补充</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-02-06T10:50:52.000Z" title="发表于 2024-02-06 18:50:52">2024-02-06</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-03-31T06:25:58.000Z" title="更新于 2024-03-31 14:25:58">2024-03-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2024/02/06/Vue3/"><header><h1 id="CrawlerTitle" itemprop="name headline">Vue3补充</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">chenw</span><time itemprop="dateCreated datePublished" datetime="2024-02-06T10:50:52.000Z" title="发表于 2024-02-06 18:50:52">2024-02-06</time><time itemprop="dateCreated datePublished" datetime="2024-03-31T06:25:58.000Z" title="更新于 2024-03-31 14:25:58">2024-03-31</time></header><p>摘要</p>
+<span id="more"></span>
+<p>正文</p>
+<h1 id="Vue3"><a href="#Vue3" class="headerlink" title="Vue3"></a>Vue3</h1><h2 id="使用vite创建工程"><a href="#使用vite创建工程" class="headerlink" title="使用vite创建工程"></a>使用vite创建工程</h2><p>选择一个目录创建，使用管理员打开</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206185500797.png" alt="image-20240206185500797"></p>
+<p>​	<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206185854228.png" alt="image-20240206185854228"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206185958672.png" alt="image-20240206185958672"></p>
+<p>暂时先不开语法检查</p>
+<p>在使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install </span><br></pre></td></tr></table></figure>
+
+<p>打开文件目录</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206191044840.png" alt="image-20240206191044840"></p>
+<p>这里的入口文件是</p>
+<p>index.html</p>
+<p> 不再是<strong>main.js</strong></p>
+<p>src文件的main.js</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206191623463.png" alt="image-20240206191623463"></p>
+<p><strong>在setup里面没有this</strong></p>
+<p>语法糖</p>
+<p>之前setup里面要返回‘</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206200120029.png" alt="image-20240206200120029"></p>
+<p>特别麻烦</p>
+<p>这次</p>
+<p>写成这样的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206200221341.png" alt="image-20240206200221341"></p>
+<p>代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">    import &#123;ref&#125; from &quot;vue&quot;;</span><br><span class="line">    let name = ref(&#x27;lina&#x27;)</span><br><span class="line">    let age = ref(18)</span><br><span class="line">    function showMsg()&#123;</span><br><span class="line">      alert(name.value)</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div class=&quot;person&quot;&gt;</span><br><span class="line">  &lt;h2&gt;&#123;&#123;name&#125;&#125;&lt;/h2&gt;</span><br><span class="line">  &lt;h2&gt;&#123;&#123;age&#125;&#125;&lt;/h2&gt;</span><br><span class="line">  &lt;button @click=&quot;showMsg&quot;&gt;点我发送信息&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">.person&#123;</span><br><span class="line">  background-color: skyblue;</span><br><span class="line">  box-shadow: 0 0 10px;</span><br><span class="line">  border-radius: 10px;</span><br><span class="line">  padding: 20px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>但是这样开发者工具的就是组件文件的名字</p>
+<p>如果需要更改还需要再写一个script标签</p>
+<p>也可以这么写</p>
+<p>不过需要使用插件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206201034008.png" alt="image-20240206201034008"></p>
+<p>然后在修改配置</p>
+<p>先引入在使用</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206201107237.png" alt="image-20240206201107237"></p>
+<p>在vite.config 的文件里面</p>
+<p>如果你不想总是.value的话</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206204834749.png" alt="image-20240206204834749"></p>
+<p>可以使用插件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206204902044.png" alt="image-20240206204902044"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206205025870.png" alt="image-20240206205025870"></p>
+<h3 id="reactive的局限"><a href="#reactive的局限" class="headerlink" title="reactive的局限"></a>reactive的局限</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206205059912.png" alt="image-20240206205059912"></p>
+<p>如果直接把对象的内容整个都换了</p>
+<p>就会导致失去响应式</p>
+<p>借助一个api</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206205527054.png" alt="image-20240206205527054"></p>
+<p>这样就可以实现整体的替换</p>
+<p>或者还有一种方法</p>
+<p>那就是定义成ref的对象</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206205829885.png" alt="image-20240206205829885"></p>
+<p>setup语法糖里的toref和torefs</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206210220759.png" alt="image-20240206210220759"></p>
+<p>这样的页面是不会有响应式的哦</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206210328226.png" alt="image-20240206210328226"></p>
+<p>因为你这样传过去的数据是纯纯字符串</p>
+<p>不是ref对象或者reactive的proxy</p>
+<p>这样就可以把</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206211052131.png" alt="image-20240206211052131"></p>
+<p>toref适用于一个的属性的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206211951006.png" alt="image-20240206211951006"></p>
+<p>怎么让计算属性既有可读的属性又有更改的属性</p>
+<p>computed的简写</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206212622912.png" alt="image-20240206212622912"></p>
+<p>只会有读的属性</p>
+<p>如果<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206213001483.png" alt="image-20240206213001483"></p>
+<p>这么写sum的值是改不了的</p>
+<p>watch监视值的范围</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206215422761.png" alt="image-20240206215422761"></p>
+<p>函数返回的一个结果gette函数</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206215503557.png" alt="image-20240206215503557"></p>
+<p>watch调用的时候会有响应值的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206215932119.png" alt="image-20240206215932119"></p>
+<p>是一个函数</p>
+<p>调用它就会停止监视</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206220034801.png" alt="image-20240206220034801"></p>
+<p>所以可以这样</p>
+<p>当&gt;10的时候停止监视</p>
+<p>watch的监视</p>
+<p>监视ref定义的对象类型</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206220412191.png" alt="image-20240206220412191"></p>
+<p>修改person’里面的值不会监视的到</p>
+<p>但是整个修改会引起地址的变化</p>
+<p>会监视的到</p>
+<p>如果想要监视对象内部的变化的话</p>
+<p>需要使用加上</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206220637246.png" alt="image-20240206220637246"></p>
+<p>监视reactive定义的数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206220849260.png" alt="image-20240206220849260"></p>
+<p>这两种方法是不同的</p>
+<p>第一个的是地址的彻底改了</p>
+<p>第二个的是只是批量的把属性的值更改了</p>
+<p>reactive定义的对象默认是开启深度监视的</p>
+<p>总结：</p>
+<p><strong>ref定义的对象需要使用开启deep，但是reactive定义的对象需要手动进行更改</strong></p>
+<p>监视对象下的某个属性</p>
+<p>刚才说到watch检测的类型</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206221425256.png" alt="image-20240206221425256"></p>
+<p>可以用一个箭头函数返回属性的属性值</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206221522037.png" alt="image-20240206221522037"></p>
+<p>如果属性还是函对象的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206221647511.png" alt="image-20240206221647511"></p>
+<p>如果</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206221737182.png" alt="image-20240206221737182"></p>
+<p>这么些的话</p>
+<p>car里面的c1和c2</p>
+<p>更改会被监视</p>
+<p>但是整体改的话监视不到</p>
+<p>函数</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206221835077.png" alt="image-20240206221835077"></p>
+<p>与此相反</p>
+<p>所以最好 的写法，<strong>监视对象中的对象</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240206221918813.png" alt="image-20240206221918813"></p>
+<p>把深度打开这样都能检测的到</p>
+<p>多个数据的写成数组</p>
+<p>在app组件里面存在大量的vue2代码‘</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240207093057426.png" alt="image-20240207093057426"></p>
+<p>这里面的代码都可以删去直流一个import就可以</p>
+<p>因为可以自动的return</p>
+<p>可以把personreturn出去就相当于注册组件</p>
+<p>在获取页面的标签有些问题</p>
+<p>在app里面</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240207093446153.png" alt="image-20240207093446153"></p>
+<p>有一个title2的h2</p>
+<p>在person里面也有一个</p>
+<p>这样在person里面获取这个就会把app组件的也获取出来</p>
+<p>所以使用ref</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240207094131857.png" alt="image-20240207094131857"></p>
+<p>这样就可以获取dom元素 </p>
+<p>而且</p>
+<p>ref的只在自己的组件获取</p>
+<p>如果把ref放在组件的标签上</p>
+<p>获取到的是组件的实例对象</p>
+<p>它可以获取自组件的变量</p>
+<p>但是必须还得暴露出来在子组件</p>
+<p>在子组件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240207095531952.png" alt="image-20240207095531952"></p>
+<p>把需要暴露的值写在这里</p>
+<p>先去学习typescript</p>
+<p>学完以后再回来</p>
+<p>使用接口规范定义的setup定义的类</p>
+<p>创建types的文件夹</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208103349994.png" alt="image-20240208103349994"></p>
+<p>定义规范</p>
+<p>在peron组件导入的时候<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208103424894.png" alt="image-20240208103424894"></p>
+<p>接收的时候需要使用type</p>
+<p>如果定义成数组每一个对象符合接口的规范</p>
+<p>这里姐可以使用泛型</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208103802651.png" alt="image-20240208103802651"></p>
+<p>或者干净一点的话</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208104031296.png" alt="image-20240208104031296"></p>
+<p>在person的里面</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208104106166.png" alt="image-20240208104106166"></p>
+<p>或者</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208104143812.png" alt="image-20240208104143812"></p>
+<p>就是数组定义的类型推荐reactive直接传递泛型</p>
+<p>下面演示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script lang=&quot;ts&quot; setup&gt;</span><br><span class="line">import Person from &quot;@/components/Person.vue&quot;;</span><br><span class="line">import &#123;type persons&#125; from &#x27;@/types&#x27;</span><br><span class="line">import &#123;reactive&#125; from &quot;vue&quot;;</span><br><span class="line">let personList:persons=reactive([</span><br><span class="line">  &#123;name:&#x27;gagag&#x27;,age:18&#125;,</span><br><span class="line">  &#123;name:&#x27;gagag&#x27;,age:18&#125;,</span><br><span class="line">  &#123;name:&#x27;gagag&#x27;,age:18&#125;,</span><br><span class="line">  &#123;name:&#x27;gagag&#x27;,age:18&#125;,</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以写成这样的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script lang=&quot;ts&quot; setup&gt;</span><br><span class="line">import Person from &quot;@/components/Person.vue&quot;;</span><br><span class="line">import &#123;type persons&#125; from &#x27;@/types&#x27;</span><br><span class="line">import &#123;reactive&#125; from &quot;vue&quot;;</span><br><span class="line">let personList=reactive&lt;persons&gt;([</span><br><span class="line">  &#123;name:&#x27;gagag&#x27;,age:18&#125;,</span><br><span class="line">  &#123;name:&#x27;gagag&#x27;,age:18&#125;,</span><br><span class="line">  &#123;name:&#x27;gagag&#x27;,age:18&#125;,</span><br><span class="line">  &#123;name:&#x27;gagag&#x27;,age:18&#125;,</span><br><span class="line">])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用props传数据在vue3"><a href="#使用props传数据在vue3" class="headerlink" title="使用props传数据在vue3"></a>使用props传数据在vue3</h2><p>app组件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script lang=&quot;ts&quot; setup&gt;</span><br><span class="line">import Person from &quot;@/components/Person.vue&quot;;</span><br><span class="line">import &#123;type persons&#125; from &#x27;@/types&#x27;</span><br><span class="line">import &#123;reactive&#125; from &quot;vue&quot;;</span><br><span class="line">let personList=reactive&lt;persons&gt;([</span><br><span class="line">  &#123;name:&#x27;gagag&#x27;,age:18&#125;,</span><br><span class="line">  &#123;name:&#x27;gagag&#x27;,age:18&#125;,</span><br><span class="line">  &#123;name:&#x27;gagag&#x27;,age:18&#125;,</span><br><span class="line">  &#123;name:&#x27;gagag&#x27;,age:18&#125;,</span><br><span class="line">])</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div class=&quot;app&quot;&gt;</span><br><span class="line">  &lt;Person :person=&quot;personList&quot;&gt;&lt;/Person&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<p>person组件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">defineProps([&#x27;person&#x27;])</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div class=&quot;person&quot;&gt;</span><br><span class="line">&#123;&#123;person&#125;&#125;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<p>而且还有返回值</p>
+<p>因为<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208105719000.png" alt="image-20240208105719000"></p>
+<p>在这是打印不出的</p>
+<p>因为没有person变量</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208105824059.png" alt="image-20240208105824059"></p>
+<p>这样的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208105848355.png" alt="image-20240208105848355"></p>
+<p>补充一下v-for居然还可以遍历数字</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208110451052.png" alt="image-20240208110451052"></p>
+<p>这样遍历5次，但是数据是空白的</p>
+<p>props也可以设置规范使用泛型</p>
+<p>代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123;type persons&#125; from &#x27;@/types&#x27;</span><br><span class="line">// let personlist=defineProps([&#x27;person&#x27;])</span><br><span class="line">// console.log(personlist)</span><br><span class="line">defineProps&lt;&#123;person:persons&#125;&gt;()</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这样就限制了传过来的person是符合persons泛型的</p>
+<p>继续升级</p>
+<p>这回可以接收person+限制类型+限制必要性+指定默认值</p>
+<p>需要使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123;type persons&#125; from &#x27;@/types&#x27;</span><br><span class="line">// let personlist=defineProps([&#x27;person&#x27;])</span><br><span class="line">// console.log(personlist)</span><br><span class="line">withDefaults(defineProps&lt;&#123;person?:persons&#125;&gt;(),&#123;</span><br><span class="line">  person:()=&gt;[&#123;name:&#x27;hahahha&#x27;,age:18&#125;]</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>withdefault</p>
+<p>问号的作用的是可以不用传递person</p>
+<p>后面的默认值必须是函数的返回值</p>
+<p>总结的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208112549789.png" alt="image-20240208112549789"></p>
+<p>还有重点</p>
+<p>刚才在引入defineProps和之前引入definexpose的那个</p>
+<p>没有从vue引入就可以使用</p>
+<p>我们称这些函数为<strong>宏函数</strong></p>
+<p>声明周期</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208114329459.png" alt="image-20240208114329459"></p>
+<p>这回变成箭头函数了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208114400561.png" alt="image-20240208114400561"></p>
+<p>父和子的生命周期</p>
+<p>从父亲的代码一个一个执行，所以先挂载的是子组件</p>
+<p>遇到子的的组件就进入子组件，执行完在到父组件然后挂载父组件</p>
+<h2 id="自定义HOOKs"><a href="#自定义HOOKs" class="headerlink" title="自定义HOOKs"></a>自定义HOOKs</h2><p>模块式开发</p>
+<p>每个功能的方法和数据写在一起</p>
+<p>首先创建hooks的文件夹</p>
+<p>这里一般装模块的</p>
+<p>命名基本使用use开头<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208150829987.png" alt="image-20240208150829987"> </p>
+<p>把代码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208150844091.png" alt="image-20240208150844091"></p>
+<p>包装成一个函数</p>
+<p>然后再返回出来</p>
+<p>然后在组件里面</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208151021430.png" alt="image-20240208151021430"></p>
+<p>先调用那个函数就会返回刚才return的</p>
+<p>然后再解构赋值</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208151102827.png" alt="image-20240208151102827"></p>
+<p>而且hook里面还可以写钩子</p>
+<p>还可以使用计算属性，监视属性</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>vue3路由的变化</p>
+<p>在mian.ts里面</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp&#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="comment">//引入app创建应用</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&quot;@/App.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> vueRouter <span class="keyword">from</span> <span class="string">&#x27;@/router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&quot;@/router&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app=<span class="title function_">createApp</span>(<span class="title class_">App</span>)</span><br><span class="line">app.<span class="title function_">use</span>(router)</span><br><span class="line">app.<span class="title function_">mount</span>(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在路由器的配置文件里面</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;createRouter,createWebHistory&#125; <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">About</span> <span class="keyword">from</span> <span class="string">&quot;@/components/About.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">News</span> <span class="keyword">from</span> <span class="string">&quot;@/components/News.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Home</span> <span class="keyword">from</span> <span class="string">&quot;@/components/Home.vue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="title function_">createRouter</span>(&#123;</span><br><span class="line">    <span class="attr">history</span>:<span class="title function_">createWebHistory</span>(), <span class="comment">//路由的工作模式</span></span><br><span class="line">    <span class="attr">routes</span>:[</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">path</span>:<span class="string">&quot;/Home&quot;</span>,</span><br><span class="line">            <span class="attr">component</span>:<span class="title class_">Home</span></span><br><span class="line">        &#125;,&#123;</span><br><span class="line">            <span class="attr">path</span>:<span class="string">&quot;/News&quot;</span>,</span><br><span class="line">            <span class="attr">component</span>:<span class="title class_">News</span></span><br><span class="line">        &#125;,&#123;</span><br><span class="line">            <span class="attr">path</span>:<span class="string">&quot;/About&quot;</span>,</span><br><span class="line">            <span class="attr">component</span>:<span class="title class_">About</span></span><br><span class="line">        &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router</span><br></pre></td></tr></table></figure>
+
+<p>名字发生改变</p>
+<p>而且必须有一个配置项叫做history</p>
+<p>之前配置路由模式</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208155608694.png" alt="image-20240208155608694"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208155702921.png" alt="image-20240208155702921"></p>
+<p>如果想要整哈希的话</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208155926748.png" alt="image-20240208155926748"></p>
+<p>​	之前的命名路由和to的对象方法还是之前的那样 </p>
+<p>嵌套路由</p>
+<p>父级路由，两种方法传递query的参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;news&quot;&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li v-for=&quot;news in newList&quot;&gt;&lt;router-link :to=&quot;&#123;</span><br><span class="line">        path:&#x27;/News/detail&#x27;,</span><br><span class="line">        query:&#123;</span><br><span class="line">          content:news.content</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;&quot;&gt;&#123;&#123;news.title&#125;&#125;&lt;/router-link&gt;&lt;/li&gt;</span><br><span class="line">&lt;!--      &lt;li v-for=&quot;news in newList&quot;&gt;&lt;router-link :to=&quot;`/News/Detail/?content=$&#123;news.content&#125;`&quot;&gt;&#123;&#123;news.title&#125;&#125;&lt;/router-link&gt;&lt;/li&gt;--&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;div class=&quot;news-content&quot;&gt;</span><br><span class="line">      &lt;router-view/&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot; name=&quot;News&quot;&gt;</span><br><span class="line">import &#123;reactive&#125; from &quot;vue&quot;;</span><br><span class="line"></span><br><span class="line">let newList = reactive([</span><br><span class="line">  &#123;id:&#x27;jdhsdhshd01&#x27;,title:&#x27;内马尔·达·席尔瓦·桑托斯·儒尼奥尔&#x27;,content:&#x27;1992年2月5日出生于巴西圣保罗州，巴西职业足球运动员，司职前锋，现效力于沙特阿拉伯职业足球联赛的利雅得新月足球俱乐部 [1]，亦担任巴西国家男子足球队队长&#x27;&#125;,</span><br><span class="line">  &#123;id:&#x27;jdhsdhshd02&#x27;,title:&#x27;C罗&#x27;,content:&#x27;克里斯蒂亚诺·罗纳尔多（Cristiano Ronaldo），全名克里斯蒂亚诺·罗纳尔多·多斯·桑托斯·阿维罗（Cristiano Ronaldo dos Santos Aveiro），简称C罗，1985年2月5日出生于葡萄牙马德拉群岛丰沙尔，葡萄牙职业足球运动员，司职边锋/中锋，现效力于沙特阿拉伯职业足球联赛的利雅得胜利足球俱乐部&#x27;&#125;,</span><br><span class="line">  &#123;id:&#x27;jdhsdhshd03&#x27;,title:&#x27;姆巴佩&#x27;,content:&#x27;基利安·姆巴佩（Kylian Mbappé），全名基利安·桑米·姆巴佩·洛坦（Kylian Sanmi Mbappé Lottin），1998年12月20日出生于法国塞纳-圣但尼省邦迪，法国职业足球运动员，司职前锋，现效力于法国足球甲级联赛的巴黎圣日耳曼足球俱乐部。&#x27;&#125;,</span><br><span class="line">  &#123;id:&#x27;jdhsdhshd04&#x27;,title:&#x27;菲利克斯&#x27;,content:&#x27;若昂·费利克斯（João Félix），全名若昂·费利克斯·塞凯拉（João Félix Sequeira），1999年11月10日出生于葡萄牙维塞乌，葡萄牙职业足球运动员，司职前锋，现效力于西班牙足球甲级联赛的巴塞罗那足球俱乐部 [59]。&#x27;&#125;,</span><br><span class="line">])</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">/* 新闻 */</span><br><span class="line">.news &#123;</span><br><span class="line">  padding: 0 20px;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: space-between;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.news ul &#123;</span><br><span class="line">  margin-top: 30px;</span><br><span class="line">  list-style: none;</span><br><span class="line">  padding-left: 10px;</span><br><span class="line">&#125;</span><br><span class="line">.news li&gt;a &#123;</span><br><span class="line">  font-size: 18px;</span><br><span class="line">  line-height: 40px;</span><br><span class="line">  text-decoration: none;</span><br><span class="line">  color: #64967E;</span><br><span class="line">  text-shadow: 0 0 1px rgb(0, 84, 0);</span><br><span class="line">&#125;</span><br><span class="line">.news-content &#123;</span><br><span class="line">  width: 70%;</span><br><span class="line">  height: 90%;</span><br><span class="line">  border: 1px solid;</span><br><span class="line">  margin-top: 20px;</span><br><span class="line">  border-radius: 10px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>接收的话</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;ul class=&quot;news-list&quot;&gt;</span><br><span class="line">    &lt;li&gt;&#123;&#123;route.query.content&#125;&#125;&lt;/li&gt;</span><br><span class="line">  &lt;/ul&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot; name=&quot;About&quot;&gt;</span><br><span class="line">import &#123;useRoute&#125; from &quot;vue-router&quot;;</span><br><span class="line">let route = useRoute()</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>注意:<strong>如果从响应式对象里面直接解构，就会失去响应式</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208164741661.png" alt="image-20240208164741661"></p>
+<p>useroute的返回值</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208162942617.png" alt="image-20240208162942617"></p>
+<p><strong>pararms参数</strong></p>
+<p>第二种的pararms的必须是name</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208165601409.png" alt="image-20240208165601409"></p>
+<p>不能写路径</p>
+<p>在使用第一种写法的时候发现</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208165840548.png" alt="image-20240208165840548"></p>
+<p>传递的内容不能太长</p>
+<p>第二种的写法没有这个限制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;news&quot;&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">&lt;!--      &lt;li v-for=&quot;news in newList&quot;&gt;&lt;router-link :to=&quot;`/News/Detail/$&#123;news.content&#125;`&quot;&gt;&#123;&#123;news.title&#125;&#125;&lt;/router-link&gt;&lt;/li&gt;--&gt;</span><br><span class="line">      &lt;li v-for=&quot;news in newList&quot;&gt;&lt;router-link :to=&quot;&#123;</span><br><span class="line">        name:&#x27;hh&#x27;,</span><br><span class="line">        params:&#123;</span><br><span class="line">          content:news.content</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;&quot;&gt;&#123;&#123;news.title&#125;&#125;&lt;/router-link&gt;&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;div class=&quot;news-content&quot;&gt;</span><br><span class="line">      &lt;router-view/&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot; name=&quot;News&quot;&gt;</span><br><span class="line">import &#123;reactive&#125; from &quot;vue&quot;;</span><br><span class="line"></span><br><span class="line">let newList = reactive([</span><br><span class="line">  &#123;id:&#x27;jdhsdhshd01&#x27;,title:&#x27;内马尔·达·席尔瓦·桑托斯·儒尼奥尔&#x27;,content:&#x27;1992年2月5日出生于巴西圣保罗州，巴西职业足球运动员，司职前锋，现效力于沙特阿拉伯职业足球联赛的利雅得新月足球俱乐部 [1]，亦担任巴西国家男子足球队队长&#x27;&#125;,</span><br><span class="line">  &#123;id:&#x27;jdhsdhshd02&#x27;,title:&#x27;C罗&#x27;,content:&#x27;克里斯蒂亚诺·罗纳尔多（Cristiano Ronaldo），全名克里斯蒂亚诺·罗纳尔多·多斯·桑托斯·阿维罗（Cristiano Ronaldo dos Santos Aveiro），简称C罗，1985年2月5日出生于葡萄牙马德拉群岛丰沙尔，葡萄牙职业足球运动员，司职边锋/中锋，现效力于沙特阿拉伯职业足球联赛的利雅得胜利足球俱乐部&#x27;&#125;,</span><br><span class="line">  &#123;id:&#x27;jdhsdhshd03&#x27;,title:&#x27;姆巴佩&#x27;,content:&#x27;基利安·姆巴佩（Kylian Mbappé），全名基利安·桑米·姆巴佩·洛坦（Kylian Sanmi Mbappé Lottin），1998年12月20日出生于法国塞纳-圣但尼省邦迪，法国职业足球运动员，司职前锋，现效力于法国足球甲级联赛的巴黎圣日耳曼足球俱乐部。&#x27;&#125;,</span><br><span class="line">  &#123;id:&#x27;jdhsdhshd04&#x27;,title:&#x27;菲利克斯&#x27;,content:&#x27;若昂·费利克斯（João Félix），全名若昂·费利克斯·塞凯拉（João Félix Sequeira），1999年11月10日出生于葡萄牙维塞乌，葡萄牙职业足球运动员，司职前锋，现效力于西班牙足球甲级联赛的巴塞罗那足球俱乐部 [59]。&#x27;&#125;,</span><br><span class="line">])</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>而且占位的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">                    name:&#x27;hh&#x27;,</span><br><span class="line">                    path:&#x27;Detail/:content&#x27;,</span><br><span class="line">                    component:Detail,</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br></pre></td></tr></table></figure>
+
+<p>和</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;li v-for=&quot;news in newList&quot;&gt;&lt;router-link :to=&quot;&#123;</span><br><span class="line">       name:&#x27;hh&#x27;,</span><br><span class="line">       params:&#123;</span><br><span class="line">         content:news.content</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;&quot;&gt;&#123;&#123;news.title&#125;&#125;&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里的content要保持一致</p>
+<p><strong>注意不能传递数组，第二种的传递方法只能使用name，路由的占位的名字和pararms的参数名保持一致，还有一个可以控制传递和不传递</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">                  name:&#x27;hh&#x27;,</span><br><span class="line">                  path:&#x27;Detail/:content?&#x27;,</span><br><span class="line">                  component:Detail,</span><br><span class="line"></span><br><span class="line">              &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在comtent后面加上？在params的选项里面就可以不用传递comtent这个参数也可以传递，</strong></p>
+<h2 id="props配置项"><a href="#props配置项" class="headerlink" title="props配置项"></a>props配置项</h2><p>第一种使用true的写法</p>
+<p>在配置文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208181739676.png" alt="image-20240208181739676"></p>
+<p>这样传递给detail的数据就是params的参数</p>
+<p>然后在这里接收这个参数</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208181849519.png" alt="image-20240208181849519"></p>
+<p>第二种函数的写法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208182303709.png" alt="image-20240208182303709"></p>
+<p>这里可以也可以获取到</p>
+<p>query的参数</p>
+<p>然后再接受</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208182339186.png" alt="image-20240208182339186"></p>
+<p>更简单的规则</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208182427044.png" alt="image-20240208182427044"></p>
+<p>又是push和replace</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208182638716.png" alt="image-20240208182638716"></p>
+<p>没有记录</p>
+<h2 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208182836630.png" alt="image-20240208182836630"></p>
+<p>调用useRouter</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208183011802.png" alt="image-20240208183011802"></p>
+<p>和获取传递的参数useroute不一样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup lang=&quot;ts&quot; name=&quot;Home&quot;&gt;</span><br><span class="line">import &#123;onMounted&#125; from &quot;vue&quot;;</span><br><span class="line">import &#123;useRouter&#125; from &#x27;vue-router&#x27;</span><br><span class="line">const Router=useRouter()</span><br><span class="line">onMounted(()=&gt;&#123;</span><br><span class="line">  setTimeout(()=&gt;&#123;</span><br><span class="line">    Router.push(&#x27;/News&#x27;)</span><br><span class="line">  &#125;,3000)</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>记住一定是useRouter不是useroute</p>
+<p>这样就可以i再点击首页以后跳转到？news</p>
+<p>实际上编程式导航比rouer-link用的多</p>
+<p><strong>记住to里面能写什么，这个push’里面就可以写什么</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> router.push(&#123;</span><br><span class="line">    name:&#x27;hh&#x27;,</span><br><span class="line">    params:&#123;</span><br><span class="line">      content:news.content</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;news&quot;&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li v-for=&quot;news in newList&quot;&gt;</span><br><span class="line">        &lt;button @click=&quot;showContent(news)&quot;&gt;点击查看新闻&lt;/button&gt;</span><br><span class="line">        &lt;router-link :to=&quot;&#123;</span><br><span class="line">        name:&#x27;hh&#x27;,</span><br><span class="line">        params:&#123;</span><br><span class="line">          content:news.content</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;&quot;&gt;&#123;&#123;news.title&#125;&#125;</span><br><span class="line">        &lt;/router-link&gt;</span><br><span class="line">     &lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;div class=&quot;news-content&quot;&gt;</span><br><span class="line">      &lt;router-view/&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot; name=&quot;News&quot;&gt;</span><br><span class="line">import &#123;reactive&#125; from &quot;vue&quot;;</span><br><span class="line">import &#123;useRoute, useRouter&#125; from &quot;vue-router&quot;;</span><br><span class="line"></span><br><span class="line">let newList = reactive([</span><br><span class="line">  &#123;id:&#x27;jdhsdhshd01&#x27;,title:&#x27;内马尔·达·席尔瓦·桑托斯·儒尼奥尔&#x27;,content:&#x27;1992年2月5日出生于巴西圣保罗州，巴西职业足球运动员，司职前锋，现效力于沙特阿拉伯职业足球联赛的利雅得新月足球俱乐部 [1]，亦担任巴西国家男子足球队队长&#x27;&#125;,</span><br><span class="line">  &#123;id:&#x27;jdhsdhshd02&#x27;,title:&#x27;C罗&#x27;,content:&#x27;克里斯蒂亚诺·罗纳尔多（Cristiano Ronaldo），全名克里斯蒂亚诺·罗纳尔多·多斯·桑托斯·阿维罗（Cristiano Ronaldo dos Santos Aveiro），简称C罗，1985年2月5日出生于葡萄牙马德拉群岛丰沙尔，葡萄牙职业足球运动员，司职边锋/中锋，现效力于沙特阿拉伯职业足球联赛的利雅得胜利足球俱乐部&#x27;&#125;,</span><br><span class="line">  &#123;id:&#x27;jdhsdhshd03&#x27;,title:&#x27;姆巴佩&#x27;,content:&#x27;基利安·姆巴佩（Kylian Mbappé），全名基利安·桑米·姆巴佩·洛坦（Kylian Sanmi Mbappé Lottin），1998年12月20日出生于法国塞纳-圣但尼省邦迪，法国职业足球运动员，司职前锋，现效力于法国足球甲级联赛的巴黎圣日耳曼足球俱乐部。&#x27;&#125;,</span><br><span class="line">  &#123;id:&#x27;jdhsdhshd04&#x27;,title:&#x27;菲利克斯&#x27;,content:&#x27;若昂·费利克斯（João Félix），全名若昂·费利克斯·塞凯拉（João Félix Sequeira），1999年11月10日出生于葡萄牙维塞乌，葡萄牙职业足球运动员，司职前锋，现效力于西班牙足球甲级联赛的巴塞罗那足球俱乐部 [59]。&#x27;&#125;,</span><br><span class="line">])</span><br><span class="line">const router = useRouter()</span><br><span class="line">interface newsInter &#123;</span><br><span class="line">  id:string,</span><br><span class="line">  title:string,</span><br><span class="line">  content:string</span><br><span class="line">&#125;</span><br><span class="line">function showContent(news:newsInter)&#123;</span><br><span class="line">  router.push(&#123;</span><br><span class="line">    name:&#x27;hh&#x27;,</span><br><span class="line">    params:&#123;</span><br><span class="line">      content:news.content</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">/* 新闻 */</span><br><span class="line">.news &#123;</span><br><span class="line">  padding: 0 20px;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: space-between;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.news ul &#123;</span><br><span class="line">  margin-top: 30px;</span><br><span class="line">  list-style: none;</span><br><span class="line">  padding-left: 10px;</span><br><span class="line">&#125;</span><br><span class="line">.news li&gt;a &#123;</span><br><span class="line">  font-size: 18px;</span><br><span class="line">  line-height: 40px;</span><br><span class="line">  text-decoration: none;</span><br><span class="line">  color: #64967E;</span><br><span class="line">  text-shadow: 0 0 1px rgb(0, 84, 0);</span><br><span class="line">&#125;</span><br><span class="line">.news-content &#123;</span><br><span class="line">  width: 70%;</span><br><span class="line">  height: 90%;</span><br><span class="line">  border: 1px solid;</span><br><span class="line">  margin-top: 20px;</span><br><span class="line">  border-radius: 10px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="重定义"><a href="#重定义" class="headerlink" title="重定义"></a>重定义</h2><p>刚开始进入首页的时候</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208185110192.png" alt="image-20240208185110192"></p>
+<p>什么也没有</p>
+<p>在一级路由下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208185219030.png" alt="image-20240208185219030"></p>
+<p>定义一个重定向</p>
+<p>让刚进来的首页为&#x2F;Home</p>
+<h2 id="pinia"><a href="#pinia" class="headerlink" title="pinia"></a>pinia</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208185401550.png" alt="image-20240208185401550"></p>
+<p>没有vuex那么臃肿</p>
+<p>都是集中式状态管理</p>
+<p>就是把数据放在一个容器里面</p>
+<p>安装pinia</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208200432717.png" alt="image-20240208200432717"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import &#123; useCountStore&#125; from &#x27;@/store/Count&#x27;</span><br><span class="line"></span><br><span class="line">let number = ref(1)</span><br><span class="line">const countStore = useCountStore()</span><br><span class="line">console.log(countStore)</span><br></pre></td></tr></table></figure>
+
+<p>发现是一个reactive定义的对像</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208202231054.png" alt="image-20240208202231054"></p>
+<p>而且里面还有刚才在state定义的sum这里的sum是ref类型的</p>
+<p>那怎么读出来呢？</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208202341663.png" alt="image-20240208202341663"></p>
+<p>这样读是错误的</p>
+<p>因为模仿一下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208202410281.png" alt="image-20240208202410281"></p>
+<p><strong>定义在reative的对象的属性再用ref定义</strong></p>
+<p><strong>读取的时候就不用加value</strong></p>
+<p>或者用</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240208202617902.png" alt="image-20240208202617902"></p>
+<p>修改的方法</p>
+<p>直接解构的话就会失去响应式</p>
+<p>这个东西也可以使用torefs</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209154046885.png" alt="image-20240209154046885"></p>
+<p>但是这么写</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209154203990.png" alt="image-20240209154203990"></p>
+<p>里面全部都是ref对象了用不到的东西也正上了</p>
+<p>所以一般使用pinia里的store里面的storetorefs</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import &#123;storeToRefs&#125; from &quot;pinia&quot;;</span><br><span class="line"></span><br><span class="line">let number = ref(1)</span><br><span class="line">const countStore = useCountStore()</span><br><span class="line">const &#123;sum&#125; = storeToRefs(countStore)</span><br></pre></td></tr></table></figure>
+
+<h2 id="getters"><a href="#getters" class="headerlink" title="getters"></a>getters</h2><p>和vuex里面的一样感觉</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209155100255.png" alt="image-20240209155100255"></p>
+<p>里面有state的参数可以读到state里面的数据</p>
+<p>或者这里的this样式可以读到的</p>
+<p>如果不用this的话</p>
+<p>这个就可以简写成箭头函数</p>
+<p>然后直接在组件里面就可以获取的到</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209155351993.png" alt="image-20240209155351993"></p>
+<p><strong>订阅</strong></p>
+<p>有点像监视属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import &#123;reactive&#125; from &quot;vue&quot;;</span><br><span class="line">import axios from &quot;axios&quot;;</span><br><span class="line">import &#123;nanoid&#125; from &quot;nanoid&quot;</span><br><span class="line">import &#123;useLoveStore&#125; from &quot;@/store/Love&quot;;</span><br><span class="line"></span><br><span class="line">let loveStore = useLoveStore();</span><br><span class="line">console.log(loveStore.taskList)</span><br><span class="line">async function addLove()&#123;</span><br><span class="line">  let &#123;data:&#123;content&#125;&#125;=await axios.get(&#x27;https://api.uomg.com/api/rand.qinghua?format=json&#x27;)</span><br><span class="line">  let obj = &#123;id:nanoid(),title:content&#125;</span><br><span class="line">  loveStore.taskList.unshift(obj)</span><br><span class="line">&#125;</span><br><span class="line">loveStore.$subscribe((mutate,state)=&gt;&#123;</span><br><span class="line">  console.log(&#x27;loveStore里面的数据发生了变化&#x27;,mutate,state)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>只要一修改的话</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209155807818.png" alt="image-20240209155807818"></p>
+<p>第二个参数比较重要</p>
+<p><strong>组合式的写法</strong></p>
+<p>组合式写法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209160321759.png" alt="image-20240209160321759"></p>
+<p>组合式api</p>
+<p>这是组合式的写法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240213163902517.png" alt="image-20240213163902517"></p>
+<h2 id="组件通信的梳理"><a href="#组件通信的梳理" class="headerlink" title="组件通信的梳理"></a>组件通信的梳理</h2><p>自定义事件</p>
+<p>子组件给父组件传递信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209163541352.png" alt="image-20240209163541352"></p>
+<p>这样就可以把数据给数据给传过去</p>
+<p><strong>mitt</strong></p>
+<p>实现任意组件的通信 </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209164110367.png" alt="image-20240209164110367"></p>
+<p>差不多都一样的</p>
+<p>首先准备</p>
+<p>untils的文件夹</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209164317291.png" alt="image-20240209164317291"></p>
+<p>最后在暴露</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209164338000.png" alt="image-20240209164338000"></p>
+<p>然后在main里面引入</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209164438982.png" alt="image-20240209164438982"></p>
+<p>然后就可以实现任意组建的通信的了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209164942708.png" alt="image-20240209164942708"></p>
+<p>接收数据的一般绑定事件</p>
+<p>发送数据的一般触发事件</p>
+<p>然后在卸载的使用要</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209165230400.png" alt="image-20240209165230400"></p>
+<p>第四种方法</p>
+<p>v-<strong>model</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209165413111.png" alt="image-20240209165413111"></p>
+<p>实际上用不到到</p>
+<p>我们使用的ui库就是用这个通信的</p>
+<p>但是这个可以在外面像别人装</p>
+<p>v-model的底层原理</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209165727084.png" alt="image-20240209165727084"></p>
+<p>这么实现的前面的实现数据单页面但是页面到不了数据</p>
+<p>所以后面解决这个问题</p>
+<p>之前的el-input的输入框可以加入</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209174417831.png" alt="image-20240209174417831"></p>
+<p>但是</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209174440574.png" alt="image-20240209174440574"></p>
+<p>这次的得写成这样的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209174551172.png" alt="image-20240209174551172"></p>
+<p>先过把不懂这里的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240209174551172.png"></p>
+<p>$attrs</p>
+<p>实现给当前的组建的子组件后代组件通信</p>
+<p>之前额provide和inject</p>
+<p>传过去的但是没有接受那么剩下的就在attrs里面</p>
+<p>我们就可以就可以接受的到</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210104628198.png" alt="image-20240210104628198"></p>
+<p>升级的</p>
+<p>v-bind后面也能写成对象的形式</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210104730096.png" alt="image-20240210104730096"></p>
+<p>怎么传给孙子的组件呢？</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210104922017.png" alt="image-20240210104922017"></p>
+<p>在子组件哪里要接收</p>
+<p>然后在父组件哪里使用v-bind:”$attrs”这样就能把父亲的传给孙子</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210105047093.png" alt="image-20240210105047093"></p>
+<p>这回都能收到</p>
+<p>​	然后传过去函数就能实现孙传给爷</p>
+<p><strong>$refs和$parent</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210105417847.png" alt="image-20240210105417847"></p>
+<p>先说ref</p>
+<p>ref就是之前说过的</p>
+<p>把ref放在子组件的标签上</p>
+<p>然后</p>
+<p>在子组件中暴露出数据就可以</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210105944983.png" alt="image-20240210105944983"></p>
+<p>这样就可以</p>
+<p>$refs</p>
+<p>在</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210110243542.png" alt="image-20240210110243542"></p>
+<p>之前有个$event获取的时间对象</p>
+<p>这个refs获取的就是全部的子组件暴露的数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210110405130.png" alt="image-20240210110405130"></p>
+<p>有一个容易出错的地方</p>
+<p>当遍历对象的时候</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210111003488.png" alt="image-20240210111003488"></p>
+<p>不能使用这样去遍历</p>
+<p>因为这样是上去找的就是key这个变量属性</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210111114943.png" alt="image-20240210111114943"></p>
+<p>$parent</p>
+<p>是子组件操作父组件的</p>
+<p>和$refs的使用父组件也需要使用暴露出来</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/Vue3.assets/image-20240210111542898.png" alt="image-20240210111542898"></p>
+<p>​	<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210111638943.png" alt="image-20240210111638943"></p>
+<p><strong>provide和inject</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210111921360.png" alt="image-20240210111921360">	</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210113622023.png" alt="image-20240210113622023"></p>
+<p>记住传数据的时候不要加入.value</p>
+<p>而且接收数据的还有默认值</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210113801271.png" alt="image-20240210113801271"></p>
+<p>如果没有穿过这个数据的话</p>
+<p>mony默认值就为678</p>
+<p>还有</p>
+<p>而且传数据的时候还可以传递成对象的形式</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210114014003.png" alt="image-20240210114014003"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210114045734.png" alt="image-20240210114045734"></p>
+<p>然后添加默认值</p>
+<p>记住不要value</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210114255217.png" alt="image-20240210114255217"></p>
+<p><strong>插槽</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210114958978.png" alt="image-20240210114958978"></p>
+<p>具名插槽</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210115554023.png" alt="image-20240210115554023"></p>
+<p>之前都学过不多赘述了</p>
+<p>v-slot只能使用在template和组件标签上</p>
+<p>所以只能用tmplate包裹</p>
+<p>默认的插槽也是有名字的</p>
+<p><strong>叫做default记住v-slot的后面是.</strong></p>
+<p><strong>作用域插槽</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210120332899.png" alt="image-20240210120332899"></p>
+<p>这次的v-slot后面是&#x3D;</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210120419528.png" alt="image-20240210120419528"></p>
+<p>如果名字和传值都在的话</p>
+<p>这么写</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210120522003.png" alt="image-20240210120522003"></p>
+<p>其他的api</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210120708991.png" alt="image-20240210120708991"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210120723398.png" alt="image-20240210120723398"></p>
+<p>使用shawllowref以后</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210120846763.png" alt="image-20240210120846763"></p>
+<p>ref定义的对象</p>
+<p>里面的数据就不是响应式的</p>
+<p>就比如修改person.name和age就没有响应式</p>
+<p>但是整体还是有响应式的</p>
+<p>修改整个对象还是好用的</p>
+<p>shallowreactive里的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210121141222.png" alt="image-20240210121141222"></p>
+<p>只对象的第一层可以有响应式</p>
+<p><strong>readonly</strong>&amp;<strong>shallowreadony</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210121346173.png" alt="image-20240210121346173"></p>
+<p>readolnly函数里面要求是响应式的数据</p>
+<p>这样sum2的就是只读的sum2会跟着sum变</p>
+<p>但是改不了</p>
+<p>shallowreadonly</p>
+<p>只会处理浅层次的</p>
+<p><strong>toraw</strong></p>
+<p>把响应式数据还原成响应数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210121801679.png" alt="image-20240210121801679"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210121911372.png" alt="image-20240210121911372"></p>
+<p><strong>customref</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210122100648.png" alt="image-20240210122100648"></p>
+<p>这里的track（）和trigger（）函数的位置要记住</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240210122147795.png" alt="image-20240210122147795"></p>
+<h2 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h2><p>实现父子组件数据同步</p>
+<p>之前父亲给儿子传递数据然后再子组件更改数据</p>
+<p>然后需要自定义事件把新的值在传回去</p>
+<p>在修改</p>
+<p>现在之间使用</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240213155740126.png" alt="image-20240213155740126"></p>
+<h2 id="useattrs"><a href="#useattrs" class="headerlink" title="useattrs"></a>useattrs</h2><p>获取组件标签上的所有属性和方法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240213161104193.png" alt="image-20240213161104193"></p>
+<p>然后在用$attrs.获取所有传递过来的属性和方法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240213161250440.png" alt="image-20240213161250440"></p>
+<p>：直接把v-bind给缩写了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240213161319770.png" alt="image-20240213161319770"></p>
+<p>其实就是这样的</p>
+<p>写成对象的形式最后也会打开</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://hututu345.oss-cn-beijing.aliyuncs.com/typora/image-20240213161502053.png" alt="image-20240213161502053"></p>
+<p>类似于vue2的attrs</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">chenw</div><div class="post-copyright__author_desc">朝着美好的明天努力</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2024/02/06/Vue3/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2024/02/06/Vue3/')">Vue3补充</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2024/02/06/Vue3/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Vue3补充&amp;url=http://example.com/2024/02/06/Vue3/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">chenw</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/06/ES6-ES11/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">ES6~ES11</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/07/TypeScript/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">TypeScript</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"><div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">开挖掘机</div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue3"><span class="toc-number">1.</span> <span class="toc-text">Vue3</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8vite%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">使用vite创建工程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#reactive%E7%9A%84%E5%B1%80%E9%99%90"><span class="toc-number">1.1.1.</span> <span class="toc-text">reactive的局限</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8props%E4%BC%A0%E6%95%B0%E6%8D%AE%E5%9C%A8vue3"><span class="toc-number">1.2.</span> <span class="toc-text">使用props传数据在vue3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89HOOKs"><span class="toc-number">1.3.</span> <span class="toc-text">自定义HOOKs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1"><span class="toc-number">1.4.</span> <span class="toc-text">路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#props%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="toc-number">1.5.</span> <span class="toc-text">props配置项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA"><span class="toc-number">1.6.</span> <span class="toc-text">编程式导航</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E4%B9%89"><span class="toc-number">1.7.</span> <span class="toc-text">重定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pinia"><span class="toc-number">1.8.</span> <span class="toc-text">pinia</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getters"><span class="toc-number">1.9.</span> <span class="toc-text">getters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E7%9A%84%E6%A2%B3%E7%90%86"><span class="toc-number">1.10.</span> <span class="toc-text">组件通信的梳理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#v-model"><span class="toc-number">1.11.</span> <span class="toc-text">v-model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#useattrs"><span class="toc-number">1.12.</span> <span class="toc-text">useattrs</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/09/vue%E5%AD%A6%E4%B9%A0vue2+vue3/" title="vue2&amp;vue">vue2&amp;vue</a><time datetime="2024-07-09T07:20:48.554Z" title="发表于 2024-07-09 15:20:48">2024-07-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/06/JVM-/" title="JVm">JVm</a><time datetime="2024-07-06T12:28:55.000Z" title="发表于 2024-07-06 20:28:55">2024-07-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/30/Mybatis-Plus/" title="Mybatis-Plus">Mybatis-Plus</a><time datetime="2024-04-30T08:45:01.000Z" title="发表于 2024-04-30 16:45:01">2024-04-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/30/SSM%E6%A1%86%E6%9E%B6/" title="SSM框架">SSM框架</a><time datetime="2024-04-30T08:45:01.000Z" title="发表于 2024-04-30 16:45:01">2024-04-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/29/Spring-Boot3/" title="Spring Boot3">Spring Boot3</a><time datetime="2024-04-29T14:48:44.000Z" title="发表于 2024-04-29 22:48:44">2024-04-29</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2024 By <a class="footer-bar-link" href="/" title="chenw" target="_blank">chenw</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">2</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.csdn.net/2301_80126922?spm=1000.2115.3001.5343" title="csdn"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="csdn"/><span class="back-menu-item-text">csdn</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/chen050610" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Games/" style="font-size: 0.88rem;">Games<sup>3</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>1</sup></a><a href="/tags/PS3/" style="font-size: 0.88rem;">PS3<sup>2</sup></a><a href="/tags/axios/" style="font-size: 0.88rem;">axios<sup>1</sup></a><a href="/tags/chenw/" style="font-size: 0.88rem;">chenw<sup>1</sup></a><a href="/tags/js%E8%BF%9B%E9%98%B6/" style="font-size: 0.88rem;">js进阶<sup>1</sup></a><a href="/tags/promise%E4%BD%BF%E7%94%A8/" style="font-size: 0.88rem;">promise使用<sup>1</sup></a><a href="/tags/typescript/" style="font-size: 0.88rem;">typescript<sup>1</sup></a><a href="/tags/vue3%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 0.88rem;">vue3项目实践<sup>1</sup></a><a href="/tags/webpack/" style="font-size: 0.88rem;">webpack<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 chenw 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
